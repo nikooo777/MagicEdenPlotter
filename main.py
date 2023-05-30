@@ -15,7 +15,7 @@ url = "https://api-mainnet.magiceden.io/v2/ord/btc/activities"
 params = {
     "limit": 40,
     "offset": 0,
-    "collectionSymbol": "npc",
+    "collectionSymbol": "bitcoin-frogs",
     "kind[]": "buying_broadcasted"
 }
 
@@ -48,7 +48,7 @@ if os.path.isfile(f"{params['collectionSymbol']}.json"):
     latest_date = datetime.fromisoformat(max(item['date'] for item in data))
 else:
     # If no file exists, set latest_date to now
-    latest_date = datetime(1, 1, 1)
+    latest_date = datetime(2023, 5, 10)
 
 breaker = False
 previousPoints = []
@@ -107,4 +107,8 @@ plt.plot(dates, prices)
 plt.xlabel('Created At')
 plt.ylabel('Listed Price')
 plt.title('Listed Price over Time')
+fig = plt.gcf()
+fig.autofmt_xdate(rotation=45)
+plt.grid('on')
+plt.savefig(f"{params['collectionSymbol']}.png", format="png", dpi=1200)
 plt.show()
